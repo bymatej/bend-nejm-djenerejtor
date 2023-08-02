@@ -21,4 +21,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("generator/", include('generator.urls')),  # todo: decide if "" is a better option than "generator/"
     path("bands/", include('bands.urls')),
+    path("translation/", include('translation.urls')),
 ]
