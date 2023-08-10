@@ -1,18 +1,30 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpRequest
-from django.urls import reverse
 import requests
+from django.http import HttpRequest, HttpResponse
+from django.urls import reverse
 
 
 def generate(request: HttpRequest):
     # Get random name
+    random_name = __get_random_band_name(request)
+
+    # Translate name
+    translated_name = __translate_band_name(request, random_name)
+
+    # Return translated value
+    return HttpResponse(translated_name)
+
+
+def __get_random_band_name(request: HttpRequest) -> str:
     get_random_band_name_url = reverse('get_random_name')  # Generate the URL based on the URL pattern name
     response = requests.get(request.build_absolute_uri(get_random_band_name_url))
-    # data = response.json()
-    # random_band_names = data['bands']
-    # print(random_band_names)
+    return response.text
 
-    # Translate
 
-    # Return result
-    return HttpResponse(response)
+def __translate_band_name(request: HttpRequest, band_name: str) -> str:
+    # Translate randomly generated band name to Croatian
+    translate_to_croatian_url = reverse('translate')  # Generate the URL based on the URL pattern name
+    response = requests.post(
+        request.build_absolute_uri(translate_to_croatian_url),
+        data={'english_band_name': band_name}
+    )  # Translate randomly picked name from __get_random_band_name to Croatian
+    return response.text
