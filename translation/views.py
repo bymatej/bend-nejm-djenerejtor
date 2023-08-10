@@ -22,15 +22,24 @@ def translate(request: HttpRequest):
 
 
 def __purposefully_mess_up_the_band_name(english_band_name: str) -> str:
-    german = __translate_en_de(english_band_name)
+    swahili = __translate_en_sw(english_band_name)
+    german = __translate_sw_de(swahili)
     french = __translate_de_fr(german)
-    croatian = __translate_fr_hr(french)
+    kurdish = __translate_fr_ckb(french)
+    croatian = __translate_ckb_hr(kurdish)
     return croatian
 
 
-def __translate_en_de(string: str) -> str:
+def __translate_en_sw(string: str) -> str:
     params.update({'q': string,
                    'sl': 'en',
+                   'tl': 'sw'})
+    return __translate(params)
+
+
+def __translate_sw_de(string: str) -> str:
+    params.update({'q': string,
+                   'sl': 'sw',
                    'tl': 'de'})
     return __translate(params)
 
@@ -42,9 +51,16 @@ def __translate_de_fr(string: str) -> str:
     return __translate(params)
 
 
-def __translate_fr_hr(string: str) -> str:
+def __translate_fr_ckb(string: str) -> str:
     params.update({'q': string,
                    'sl': 'fr',
+                   'tl': 'ckb'})
+    return __translate(params)
+
+
+def __translate_ckb_hr(string: str) -> str:
+    params.update({'q': string,
+                   'sl': 'ckb',
                    'tl': 'hr'})
     return __translate(params)
 
