@@ -27,6 +27,7 @@ def __purposefully_mess_up_the_band_name(english_band_name: str) -> str:
     french = __translate_de_fr(german)
     kurdish = __translate_fr_ckb(french)
     croatian = __translate_ckb_hr(kurdish)
+    croatian = __translate_auto_hr(croatian)
     return croatian
 
 
@@ -61,6 +62,13 @@ def __translate_fr_ckb(string: str) -> str:
 def __translate_ckb_hr(string: str) -> str:
     params.update({'q': string,
                    'sl': 'ckb',
+                   'tl': 'hr'})
+    return __translate(params)
+
+
+def __translate_auto_hr(string: str) -> str:
+    params.update({'q': string,
+                   'sl': 'auto',
                    'tl': 'hr'})
     return __translate(params)
 

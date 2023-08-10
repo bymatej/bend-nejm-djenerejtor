@@ -1,5 +1,6 @@
 import requests
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
+from django.shortcuts import render
 from django.urls import reverse
 
 
@@ -11,7 +12,7 @@ def generate(request: HttpRequest):
     translated_name = __translate_band_name(request, random_name)
 
     # Return translated value
-    return HttpResponse(translated_name)
+    return render(request=request, template_name='generator/index.html', context={'generated_name': translated_name})
 
 
 def __get_random_band_name(request: HttpRequest) -> str:

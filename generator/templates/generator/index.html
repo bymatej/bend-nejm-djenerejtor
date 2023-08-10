@@ -1,0 +1,11 @@
+{% extends 'generator/base.html' %}
+
+{% block content %}
+    <div class="text-center">
+        <h3 class="title">RANDOM NAME FOR YOUR CROATIAN BAND IS</h3>
+        <br>
+        <h2>{{ generated_name }}</h2>
+        <br>
+        <button class="btn btn-light btn-lg" onClick="window.location.reload();">Generate</button>
+    </div>
+{% endblock %}
